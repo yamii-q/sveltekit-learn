@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
+import { writable, derived } from "svelte/store";
 import type { BookItem } from "../../src/repositories/book";
 
 const useBookStore = () => {
@@ -15,3 +15,7 @@ const useBookStore = () => {
 }
 
 export const books = useBookStore()
+
+export const find = (id: string) => {
+    return derived(books, $books => $books.find(book => book.id === id))
+}
