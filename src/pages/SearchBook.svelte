@@ -22,13 +22,13 @@
   $: hasMore = totalItems > $books.length;
 
   const getBooks = async () => {
-    $books = [];
+    books.reset();
     empty = false;
     startIndex = 0;
     const result = await BookRepository.get({ q });
     empty = result.totalItems === 0;
     totalItems = result.totalItems;
-    $books = result.items;
+    books.add(result.items);
   };
 
   let startIndex = 0;
@@ -45,7 +45,7 @@
     const filteredItems = result.items.filter((item) => {
       return !bookIds.includes(item.id);
     });
-    $books = [...$books, ...filteredItems];
+    books.add(filteredItems);
   };
 </script>
 
