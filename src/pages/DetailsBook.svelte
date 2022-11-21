@@ -4,6 +4,7 @@
   import { books, find } from "../../store/book";
   import RepositoryFactory, { BOOK } from "../repositories/RepositoryFactory";
   import Spinner from "../components/Spinner.svelte";
+  import BookInfo from "../components/BookInfo.svelte";
   const BookRepository = RepositoryFactory[BOOK];
 
   type Params = { id: string };
@@ -29,7 +30,7 @@
       <Spinner />
     </div>
   {:then}
-    {$book.volumeInfo.title}
+    <BookInfo book={$book} />
   {:catch e}
     <span class="text-red-600 text-sm">
       {e.message}
