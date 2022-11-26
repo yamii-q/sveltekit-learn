@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { BookItem } from "../repositories/book";
+  import Row from "./Row.svelte";
   export let book: BookItem;
 
   const formatter = new Intl.NumberFormat("ja-JP", {
@@ -25,6 +26,35 @@
       <h3 class="text-black font-bold text-xl mb-2">
         {book.volumeInfo.title}
       </h3>
+    </div>
+    <div class="border-t border-gray-200">
+      <dl>
+        <Row dt="著者">
+          {book.volumeInfo.authors?.join(",")}
+        </Row>
+        <Row dt="概要">
+          {book.volumeInfo.description}
+        </Row>
+        <Row dt="価格">
+          {price}
+        </Row>
+        <Row dt="ページ数">
+          {book.volumeInfo.pageCount}
+        </Row>
+        <Row dt="出版日">
+          {book.volumeInfo.publishedDate}
+        </Row>
+        <Row dt="出版社">
+          {book.volumeInfo.publisher}
+        </Row>
+        <Row dt="プレビュー">
+          {#if book.volumeInfo.previewLink}
+            <a href={book.volumeInfo.previewLink} class="text-blue-400">
+              {book.volumeInfo.previewLink}
+            </a>
+          {/if}
+        </Row>
+      </dl>
     </div>
   </div>
 </div>
